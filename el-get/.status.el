@@ -1,0 +1,1 @@
+(:rect-mark "installed")
