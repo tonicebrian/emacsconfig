@@ -1,10 +1,15 @@
 (add-hook 'c-mode-common-hook '(lambda () (c-toggle-auto-state 1)))
 
-(auto-fill-mode)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 ; Packages
 ;; Tell emacs where is your personal elisp lib dir
 ;; this is the dir you place all your extra packages
-(add-to-list 'load-path "~/.emacs.d/elisp")
+(let ((default-directory "~/.emacs.d/elisp/"))
+      (normal-top-level-add-to-load-path '("."))
+      (normal-top-level-add-subdirs-to-load-path))
+
+(require 'evernote-mode)
 
 (global-linum-mode 1)
 
@@ -17,6 +22,9 @@
 (setq inhibit-startup-message t 
 inhibit-startup-echo-area-message t)
 
+; Use the system configured browser
+(setq browse-url-generic-program "x-www-browser")
+
 ; Emacs autoindent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
@@ -24,10 +32,42 @@ inhibit-startup-echo-area-message t)
 (setq make-backup-files nil)
 
 ; Org mode
-(global-set-key "\C-c l" 'org-store-link)
-(global-set-key "\C-c a" 'org-agenda)
-(global-set-key "\C-c b" 'org-iswitchb)
-(global-set-key "\C-c c" 'org-capture)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-cc" 'org-capture)
+(setq org-log-done 'time) ; Close tasks with timestamp
+
+; Archive all the tasks in a subtree
+(defun my-org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file))
+
+; Agenda commands
+(setq org-agenda-custom-commands 
+'(("H" "Office and Home Lists"
+     ((agenda)
+          (tags-todo "OFFICE")
+          (tags-todo "HOME")
+          (tags-todo "COMPUTER")
+          (tags-todo "DVD")
+          (tags-todo "READING")))
+  ("D" "Daily Action List"
+      (
+           (agenda "" ((org-agenda-ndays 1)
+                       (org-agenda-sorting-strategy
+                        (quote ((agenda time-up priority-down tag-up) )))
+                       (org-deadline-warning-days 0)
+                       ))))
+  )
+)
+
+; Templates
+(setq org-capture-templates
+  '(("t" "Todo" entry (file+headline "~/Dropbox/GTD/newgtd.org" "Tasks")
+             "* TODO %?\n  %i\n  %a")
+   ("j" "Journal" entry (file+datetree "~/Dropbox/GTD/journal.org")
+        "* %?\nEntered on %U\n  %i\n  %a")))
 
 ; Setting up org-capture
 (setq org-directory "~/Dropbox/GTD")
