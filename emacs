@@ -8,7 +8,9 @@
 (let ((default-directory "~/.emacs.d/elisp/"))
       (normal-top-level-add-to-load-path '("."))
       (normal-top-level-add-subdirs-to-load-path))
-
+(require 'yasnippet)
+(setq yas/snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/elisp/yasnippet/snippets"))
+(yas/global-mode 1) 
 (require 'evernote-mode)
 
 (global-linum-mode 1)
@@ -38,14 +40,18 @@ inhibit-startup-echo-area-message t)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
 
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 ; Archive all the tasks in a subtree
 (defun my-org-archive-done-tasks ()
   (interactive)
-  (org-map-entries 'org-archive-subtree "/DONE" 'file))
+  (org-map-entries 'org-archive-subtree "/CANCELLED" 'file)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file)
+  )
 
 ; Agenda commands
 (setq org-agenda-custom-commands 
-'(("H" "Office and Home Lists"
+  '(("H" "Office and Home Lists"
      ((agenda)
           (tags-todo "OFFICE")
           (tags-todo "HOME")
@@ -114,3 +120,15 @@ inhibit-startup-echo-area-message t)
 (global-set-key (kbd "C-x r C-w")   'rm-kill-region)
 (global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/GTD/newgtd.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
