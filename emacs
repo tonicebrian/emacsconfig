@@ -2,6 +2,9 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+;; Font configuration
+(set-face-attribute 'default nil :height 110)
+
 ; Packages
 ;; Tell emacs where is your personal elisp lib dir
 ;; this is the dir you place all your extra packages
@@ -13,7 +16,7 @@
 (yas/global-mode 1) 
 (require 'evernote-mode)
 
-(global-linum-mode 1)
+;;(global-linum-mode 1)
 
 ; IDO Mode
 (ido-mode 1)
@@ -25,7 +28,8 @@
 inhibit-startup-echo-area-message t)
 
 ; Use the system configured browser
-(setq browse-url-generic-program "x-www-browser")
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 
 ; Emacs autoindent
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -40,6 +44,7 @@ inhibit-startup-echo-area-message t)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
 
+(add-hook 'message-mode-hook 'turn-on-flyspell 'append)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ; Archive all the tasks in a subtree
@@ -104,6 +109,7 @@ inhibit-startup-echo-area-message t)
 
 ; Org-babel configuration
 (require 'ob-haskell)
+(require 'ob-dot)
 (setq org-src-fontify-natively t)
 
 ; el-get for package management
