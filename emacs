@@ -14,7 +14,6 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/elisp/yasnippet/snippets"))
 (yas/global-mode 1) 
-(require 'evernote-mode)
 
 ;;(global-linum-mode 1)
 

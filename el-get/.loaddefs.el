@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (rm-mouse-drag-region rm-kill-ring-save rm-kill-region
 ;;;;;;  rm-exchange-point-and-mark rm-set-mark rm-example-picture-mode-bindings)
-;;;;;;  "rect-mark/rect-mark" "rect-mark/rect-mark.el" (20303 29248))
+;;;;;;  "rect-mark/rect-mark" "rect-mark/rect-mark.el" (20320 63187))
 ;;; Generated autoloads from rect-mark/rect-mark.el
  (define-key ctl-x-map "r\C-@" 'rm-set-mark)
  (define-key ctl-x-map [?r ?\C-\ ] 'rm-set-mark)
@@ -62,6 +62,11 @@ Highlight a rectangular region of text as the the mouse is dragged over it.
 This must be bound to a button-down mouse event.
 
 \(fn START-EVENT)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("el-get/el-get-install.el" "el-get/el-get.el")
+;;;;;;  (20321 1487 907151))
 
 ;;;***
 
