@@ -14,7 +14,6 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/elisp/yasnippet/snippets"))
 (yas/global-mode 1) 
-(require 'evernote-mode)
 
 ;;(global-linum-mode 1)
 
@@ -116,13 +115,6 @@ inhibit-startup-echo-area-message t)
 (require 'ob-haskell)
 (require 'ob-dot)
 (setq org-src-fontify-natively t)
-
-; el-get for package management
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
-(let ((default-directory "~/.emacs.d/el-get/"))
-      (normal-top-level-add-to-load-path '("."))
-      (normal-top-level-add-subdirs-to-load-path))
 
 ; Rectangular visual selection
 (require 'rect-mark)
