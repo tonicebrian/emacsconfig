@@ -44,6 +44,13 @@ inhibit-startup-echo-area-message t)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
 
+; Org mode pomodoro
+;(add-to-list 'org-modules 'org-timer)
+;(setq org-timer-default-timer 25)
+;(add-hook 'org-clock-in-hook '(lambda () 
+;      (if (not org-timer-current-timer) 
+;      (org-timer-set-timer '(16)))))
+
 (add-hook 'message-mode-hook 'turn-on-flyspell 'append)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
@@ -56,13 +63,11 @@ inhibit-startup-echo-area-message t)
 
 ; Agenda commands
 (setq org-agenda-custom-commands 
-  '(("H" "Office and Home Lists"
-     ((agenda)
-          (tags-todo "OFFICE")
-          (tags-todo "HOME")
-          (tags-todo "COMPUTER")
-          (tags-todo "DVD")
-          (tags-todo "READING")))
+  '(("H" "Office and Home Lists" ((agenda)
+				  (tags-todo "COMPUTER")
+				  (tags-todo "READING")
+				  (tags-todo "HOME")
+				  (tags-todo "OFFICE")))
   ("D" "Daily Action List"
       (
            (agenda "" ((org-agenda-ndays 1)
