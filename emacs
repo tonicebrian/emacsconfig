@@ -111,13 +111,6 @@ inhibit-startup-echo-area-message t)
 (require 'ob-dot)
 (setq org-src-fontify-natively t)
 
-; el-get for package management
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
-(let ((default-directory "~/.emacs.d/el-get/"))
-      (normal-top-level-add-to-load-path '("."))
-      (normal-top-level-add-subdirs-to-load-path))
-
 ; Rectangular visual selection
 (require 'rect-mark)
 (global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
