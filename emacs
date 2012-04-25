@@ -15,7 +15,13 @@
 (setq yas/snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/elisp/yasnippet/snippets"))
 (yas/global-mode 1) 
 
-;;(global-linum-mode 1)
+; Octave mode
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+; Haskell
+(setq haskell-program-name "ghci")
 
 ; IDO Mode
 (ido-mode 1)
@@ -36,12 +42,32 @@ inhibit-startup-echo-area-message t)
 ; No backup
 (setq make-backup-files nil)
 
-; Org mode
+;;; Org mode
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
+
+; Add reference search in Org mode
+(defun org-mode-reftex-setup ()
+  (load-library "reftex")
+  (and (buffer-file-name) (file-exists-p (buffer-file-name))
+       (progn
+	 ;enable auto-revert-mode to update reftex when bibtex file changes on disk
+	 (global-auto-revert-mode t)
+	 (reftex-parse-all)
+	 ;add a custom reftex cite format to insert links
+	 (reftex-set-cite-format
+	  '((?b . "[[bib:%l][%l-bib]]")
+	    (?n . "[[notes:%l][%l-notes]]")
+	    (?p . "[[papers:%l][%l-paper]]")
+	    (?t . "%t")
+	    (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]")))))
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
+
+(add-hook 'org-mode-hook 'org-mode-reftex-setup)
 
 ; Org mode pomodoro
 ;(add-to-list 'org-modules 'org-timer)
@@ -114,7 +140,14 @@ inhibit-startup-echo-area-message t)
 ; Org-babel configuration
 (require 'ob-haskell)
 (require 'ob-dot)
+(require 'ob-python)
+(require 'ob-sh)
 (setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil)
+
+; Use ipython as the inferior interpreter
+(require 'python-mode)
+(require 'ipython)
 
 ; Rectangular visual selection
 (require 'rect-mark)
