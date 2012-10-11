@@ -15,13 +15,31 @@
 (setq yas/snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/elisp/yasnippet/snippets"))
 (yas/global-mode 1) 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/GTD/newgtd.org")))
+ '(custom-theme-directory "~/.emacs.d/elisp/emacs-color-theme-solarized")
+ )
+
+
+;; Evil
+(require 'evil)
+(evil-mode 1)
+
+; Tramp
+(require 'tramp)
+(setq tramp-default-method "scp")
+
 ; Octave mode
 (autoload 'octave-mode "octave-mod" nil t)
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ; Haskell
-(setq haskell-program-name "ghci")
+(setq haskell-program-name "/home/tcebrian/GHC/bin/ghci")
 
 ; IDO Mode
 (ido-mode 1)
@@ -33,8 +51,8 @@
 inhibit-startup-echo-area-message t)
 
 ; Use the system configured browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+;(setq browse-url-browser-function 'browse-url-generic
+;      browse-url-generic-program "google-chrome")
 
 ; Emacs autoindent
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -48,6 +66,12 @@ inhibit-startup-echo-area-message t)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
+
+; Timer for the Pomodor Technique
+(setq org-timer-default-timer 25)
+(add-hook 'org-clock-in-hook '(lambda () 
+      (if (not org-timer-current-timer) 
+      (org-timer-set-timer '(16)))))
 
 ; Add reference search in Org mode
 (defun org-mode-reftex-setup ()
@@ -87,11 +111,14 @@ inhibit-startup-echo-area-message t)
   )
 
 ; Agenda commands
+(setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-custom-commands 
   '(("H" "Office and Home Lists" ((agenda)
 				  (tags-todo "COMPUTER")
 				  (tags-todo "READING")
 				  (tags-todo "HOME")
+				  (tags-todo "OFFICE")))
+    ("O" "Office Lists" ((agenda)
 				  (tags-todo "OFFICE")))
   ("D" "Daily Action List"
       (
@@ -115,7 +142,9 @@ inhibit-startup-echo-area-message t)
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 ; Color theme
-(load-theme 'tango-dark)
+; (load-theme 'tango-dark)
+(package-initialize)
+(load-theme 'solarized-dark t)
 
 ; Recent files opened support
 (require 'recentf)
@@ -142,12 +171,13 @@ inhibit-startup-echo-area-message t)
 (require 'ob-dot)
 (require 'ob-python)
 (require 'ob-sh)
+(require 'ob-sql)
+(require 'ob-gnuplot)
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
 
 ; Use ipython as the inferior interpreter
 (require 'python-mode)
-(require 'ipython)
 
 ; Rectangular visual selection
 (require 'rect-mark)
@@ -156,12 +186,6 @@ inhibit-startup-echo-area-message t)
 (global-set-key (kbd "C-x r C-w")   'rm-kill-region)
 (global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/Dropbox/GTD/newgtd.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
