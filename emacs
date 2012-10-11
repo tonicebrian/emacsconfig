@@ -1,6 +1,8 @@
 (add-hook 'c-mode-common-hook '(lambda () (c-toggle-auto-state 1)))
-
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+; Turn off the graphical toolbar
+(tool-bar-mode -1)
 
 ;; Font configuration
 (set-face-attribute 'default nil :height 110)
@@ -166,6 +168,12 @@ inhibit-startup-echo-area-message t)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 (global-set-key (kbd "C-x <left>")  'windmove-left)
 
+; Use ipython as the inferior interpreter
+; (require 'python)
+(require 'ipython)
+
+(setq python-remove-cwd-from-path nil)
+
 ; Org-babel configuration
 (require 'ob-haskell)
 (require 'ob-dot)
@@ -175,9 +183,6 @@ inhibit-startup-echo-area-message t)
 (require 'ob-gnuplot)
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
-
-; Use ipython as the inferior interpreter
-(require 'python-mode)
 
 ; Rectangular visual selection
 (require 'rect-mark)
