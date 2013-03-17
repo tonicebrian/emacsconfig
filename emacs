@@ -25,7 +25,8 @@
  '(org-agenda-files (quote ("~/Dropbox/GTD/newgtd.org")))
  '(custom-theme-directory "~/.emacs.d/elisp/emacs-color-theme-solarized")
  )
-
+(setq org-mobile-directory "~/Dropbox/GTD/Mobile")
+(setq org-mobile-inbox-for-pull "~/Dropbox/GTD/mobile-inbox.org")
 
 ;; Evil
 (require 'evil)
