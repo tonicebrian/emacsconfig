@@ -1,1 +1,6 @@
 auto-save-list/
+elpa
+.smex-items
+backups
+default
+ac-comphist.dat
