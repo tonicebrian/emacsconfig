@@ -175,6 +175,8 @@ inhibit-startup-echo-area-message t)
 
 (setq python-remove-cwd-from-path nil)
 
+(require 'gnuplot)
+
 ; Org-babel configuration
 (require 'ob-haskell)
 (require 'ob-dot)
