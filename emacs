@@ -170,7 +170,7 @@ inhibit-startup-echo-area-message t)
 
 ; Use ipython as the inferior interpreter
 ; (require 'python)
-(require 'ipython)
+; (require 'ipython)
 
 (setq python-remove-cwd-from-path nil)
 
