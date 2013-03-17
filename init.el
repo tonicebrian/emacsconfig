@@ -13,6 +13,7 @@
                       yasnippet
                       auto-complete
                       color-theme-sanityinc-solarized
+                      recentf
                       evil
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
@@ -90,3 +91,9 @@
 (load-theme 'sanityinc-solarized-dark t)
 (require 'evil)
 (evil-mode 1)
+
+;; recentf stuff
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
