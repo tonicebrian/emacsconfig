@@ -88,7 +88,10 @@
 (menu-bar-mode)
 (setq-default default-tab-width 4)
 
+;; Themes
 (load-theme 'sanityinc-solarized-dark t)
+
+;; Vim emulation
 (require 'evil)
 (evil-mode 1)
 
@@ -97,3 +100,54 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+; Kill this buffer and the window with C-c k
+(substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
+
+; Move to windows with cursors
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+
+; Org mode configuration
+; Org-babel configuration
+(require 'ob-haskell)
+(require 'ob-dot)
+(require 'ob-python)
+(require 'ob-sh)
+(require 'ob-sql)
+(require 'ob-gnuplot)
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil)
+
+; Agenda commands
+(setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-custom-commands
+  '(("H" "Office and Home Lists" ((agenda)
+                                  (tags-todo "COMPUTER")
+                                  (tags-todo "READING")
+                                  (tags-todo "HOME")
+                                  (tags-todo "OFFICE")))
+    ("O" "Office Lists" ((agenda)
+                         (tags-todo "OFFICE")))
+    ("D" "Daily Action List"
+     (
+      (agenda "" ((org-agenda-ndays 1)
+                  (org-agenda-sorting-strategy
+                  (quote ((agenda time-up priority-down tag-up) )))
+                  (org-deadline-warning-days 0)
+                  ))))
+    )
+)
+
+; Templates
+(setq org-capture-templates
+  '(("t" "Todo" entry (file+headline "~/Dropbox/GTD/newgtd.org" "Tasks")
+             "* TODO %?\n %i\n %a")
+   ("j" "Journal" entry (file+datetree "~/Dropbox/GTD/journal.org")
+        "* %?\nEntered on %U\n %i\n %a")))
+
+; Setting up org-capture
+(setq org-directory "~/Dropbox/GTD")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
