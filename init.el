@@ -88,6 +88,22 @@
 (menu-bar-mode)
 (setq-default default-tab-width 4)
 
+; Turn off the graphical toolbar
+(tool-bar-mode -1)
+
+; Hide the splash screen and banner
+(setq inhibit-startup-message t
+inhibit-startup-echo-area-message t)
+
+; Emacs autoindent
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+; No backup
+(setq make-backup-files nil)
+
+;; Font configuration
+(set-face-attribute 'default nil :height 110)
+
 ;; Themes
 (load-theme 'sanityinc-solarized-dark t)
 
