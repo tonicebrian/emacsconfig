@@ -111,6 +111,20 @@
 (global-set-key (kbd "C-x <left>") 'windmove-left)
 
 ; Org mode configuration
+;;; Org mode
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-cc" 'org-capture)
+(setq org-log-done 'time) ; Close tasks with timestamp
+
+; Archive all the tasks in a subtree
+(defun my-org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/CANCELLED" 'file)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file)
+  )
+
 ; Org-babel configuration
 (require 'ob-haskell)
 (require 'ob-dot)
