@@ -15,6 +15,7 @@
                       color-theme-sanityinc-solarized
                       recentf
                       evil
+                      org
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
