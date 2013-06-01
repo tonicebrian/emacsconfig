@@ -129,7 +129,7 @@ inhibit-startup-echo-area-message t)
 
 ; Org mode configuration
 ;;; Org mode
-(require 'org-install)
+(require 'org)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
