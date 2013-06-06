@@ -16,6 +16,7 @@
                       recentf
                       evil
                       org
+                      org-jira
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
@@ -143,6 +144,7 @@ inhibit-startup-echo-area-message t)
   (org-map-entries 'org-archive-subtree "/DONE" 'file)
   )
 
+; Define clock behaviour
 ; Org-babel configuration
 (require 'ob-haskell)
 (require 'ob-dot)
@@ -173,6 +175,18 @@ inhibit-startup-echo-area-message t)
     )
 )
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/GTD/newgtd.org")))
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-start-on-weekday nil)
+ '(org-clock-idle-time 10)
+ '(org-deadline-warning-days 14))
+
 ; Templates
 (setq org-capture-templates
   '(("t" "Todo" entry (file+headline "~/Dropbox/GTD/newgtd.org" "Tasks")
@@ -183,3 +197,9 @@ inhibit-startup-echo-area-message t)
 ; Setting up org-capture
 (setq org-directory "~/Dropbox/GTD")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
