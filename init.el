@@ -136,6 +136,9 @@ inhibit-startup-echo-area-message t)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
 
+(add-hook 'org-mode-hook
+          (lambda () (org-indent-mode t)))
+
 ; Archive all the tasks in a subtree
 (defun my-org-archive-done-tasks ()
   (interactive)
@@ -183,3 +186,15 @@ inhibit-startup-echo-area-message t)
 ; Setting up org-capture
 (setq org-directory "~/Dropbox/GTD")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
