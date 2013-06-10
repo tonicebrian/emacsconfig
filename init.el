@@ -137,6 +137,9 @@ inhibit-startup-echo-area-message t)
 (global-set-key "\C-cc" 'org-capture)
 (setq org-log-done 'time) ; Close tasks with timestamp
 
+(add-hook 'org-mode-hook
+          (lambda () (org-indent-mode t)))
+
 ; Archive all the tasks in a subtree
 (defun my-org-archive-done-tasks ()
   (interactive)
