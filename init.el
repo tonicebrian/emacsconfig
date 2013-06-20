@@ -16,6 +16,7 @@
                       recentf
                       evil
                       org
+                      adoc-mode
                       org-jira
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
@@ -127,6 +128,9 @@ inhibit-startup-echo-area-message t)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 (global-set-key (kbd "C-x <left>") 'windmove-left)
+
+; Week starts on Monday
+(setq calendar-week-start-day 1)
 
 ; Org mode configuration
 ;;; Org mode
