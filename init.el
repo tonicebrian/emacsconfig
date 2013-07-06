@@ -19,6 +19,7 @@
                       adoc-mode
                       org-jira
                       scala-mode2
+                      ein
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
