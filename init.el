@@ -20,6 +20,7 @@
                       org-jira
                       scala-mode2
                       linum-relative
+                      ein
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
