@@ -21,6 +21,8 @@
                       scala-mode2
                       linum-relative
                       ein
+                      w3m
+                      markdown-mode
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
@@ -212,11 +214,10 @@ inhibit-startup-echo-area-message t)
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(nil nil t)
  '(org-agenda-files (quote ("~/Dropbox/GTD/gtd.org")))
  '(org-agenda-skip-deadline-if-done t)
  '(org-clock-idle-time 10)
-)
+ )
 
 ; Templates
 (setq org-capture-templates
