@@ -19,13 +19,20 @@
                       adoc-mode
                       org-jira
                       scala-mode2
+                      linum-relative
                       ein
+                      w3m
+                      markdown-mode
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+(require 'linum-relative)
+
+(add-hook 'rst-mode (lambda () (flyspell-mode 1)))
 
 ; Ensime
 ;; Load the ensime lisp code...
@@ -134,13 +141,15 @@ inhibit-startup-echo-area-message t)
 ; Agenda commands
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-start-on-weekday nil)
+(setq org-deadline-warning-days 2)
 (setq org-agenda-custom-commands
-  '(("H" "Office and Home Lists" ((agenda)
+  `(("H" "Office and Home Lists" ((agenda)
                                   (tags-todo "COMPUTER")
                                   (tags-todo "READING")
                                   (tags-todo "HOME")
                                   (tags-todo "OFFICE")))
-    ("O" "Office Lists" ((agenda)
+    ("O" "Office Lists" ((agenda "" ((org-agenda-tag-filter-preset '("+OFFICE"))))
+                         (org-todo-list "NEXT")
                          (tags-todo "OFFICE")))
     ("D" "Daily Action List"
      (
@@ -158,11 +167,10 @@ inhibit-startup-echo-area-message t)
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(nil nil t)
  '(org-agenda-files (quote ("~/Dropbox/GTD/gtd.org")))
  '(org-agenda-skip-deadline-if-done t)
  '(org-clock-idle-time 10)
- '(org-deadline-warning-days 14))
+ )
 
 ; Templates
 (setq org-capture-templates
@@ -179,3 +187,7 @@ inhibit-startup-echo-area-message t)
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;; This file contains local customizations
+(load "~/.emacs.d/local.el")
