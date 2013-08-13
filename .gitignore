@@ -9,4 +9,5 @@ url
 bookmarks
 ensime
 session.*
+request
 local.el
