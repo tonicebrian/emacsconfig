@@ -23,6 +23,7 @@
                       ein
                       w3m
                       markdown-mode
+                      org-trello
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
@@ -156,6 +157,22 @@ inhibit-startup-echo-area-message t)
 ; Org mode configuration
 ;;; Org mode
 (require 'org)
+
+;; Capture images and put them in an org-file
+(defun my-org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (setq filename
+        (concat
+         (make-temp-name
+          (concat (buffer-file-name)
+                  "_"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (call-process "import" nil nil nil filename)
+  (insert (concat "[[" filename "]]"))
+  (org-display-inline-images))
+
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
