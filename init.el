@@ -109,6 +109,10 @@ inhibit-startup-echo-area-message t)
 ; Org mode configuration
 ;;; Org mode
 (require 'org)
+(load-library "~/.emacs.d/org-depend.el")
+(require 'org-depend)
+(setq org-enforce-todo-dependencies t)
+
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
@@ -142,22 +146,21 @@ inhibit-startup-echo-area-message t)
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-start-on-weekday nil)
 (setq org-deadline-warning-days 2)
+
 (setq org-agenda-custom-commands
-  `(("H" "Office and Home Lists" ((agenda)
-                                  (tags-todo "COMPUTER")
-                                  (tags-todo "READING")
-                                  (tags-todo "HOME")
-                                  (tags-todo "OFFICE")))
-    ("O" "Office Lists" ((agenda "" ((org-agenda-tag-filter-preset '("+OFFICE"))))
-                         (org-todo-list "NEXT")
-                         (tags-todo "OFFICE")))
-    ("D" "Daily Action List"
+  `(("D" "Daily Action List"
      (
       (agenda "" ((org-agenda-ndays 1)
-                  (org-agenda-sorting-strategy
-                  (quote ((agenda time-up priority-down tag-up) )))
+                  (org-agenda-sorting-strategy (quote ((agenda time-up priority-down tag-up))))
                   (org-deadline-warning-days 0)
-                  ))))
+                  ))
+      (todo "NEXT" ((org-tags-match-list-sublevels t)
+                    (org-agenda-overriding-header "NEXT actions:"))
+                 )
+      ))
+    ("W" "Weekly view" (
+                         (agenda "" ((org-deadline-warning-days 0)))
+                         ))
     )
 )
 
