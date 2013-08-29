@@ -24,6 +24,7 @@
                       w3m
                       markdown-mode
                       org-trello
+                      org-journal
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
@@ -112,6 +113,9 @@ inhibit-startup-echo-area-message t)
 (require 'org)
 (load-library "~/.emacs.d/org-depend.el")
 (require 'org-depend)
+(setq org-journal-dir "~/Dropbox/journal/")
+(require 'org-journal)
+
 (setq org-enforce-todo-dependencies t)
 
 ;; Capture images and put them in an org-file
@@ -170,9 +174,13 @@ same directory as the org-buffer and insert a link to this file."
                   (org-agenda-sorting-strategy (quote ((agenda time-up priority-down tag-up))))
                   (org-deadline-warning-days 0)
                   ))
-      (todo "NEXT" ((org-tags-match-list-sublevels t)
-                    (org-agenda-overriding-header "NEXT actions:"))
+      (tags-todo "+DOING/!NEXT" ((org-tags-match-list-sublevels t)
+                    (org-agenda-overriding-header "NEXT actions in the DOING projects:"))
                  )
+
+      (todo "NEXT"  (;(org-tags-match-list-sublevels t)
+                    (org-agenda-overriding-header "NEXT actions of all the active projects") )
+)
       ))
     ("W" "Weekly view" (
                          (agenda "" ((org-deadline-warning-days 0)))
@@ -186,10 +194,12 @@ same directory as the org-buffer and insert a link to this file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/Dropbox/GTD/gtd.org")))
+ '(org-agenda-files (quote ("~/Dropbox/GTD/gtd.org" "~/Dropbox/journal")))
  '(org-agenda-skip-deadline-if-done t)
  '(org-clock-idle-time 10)
  )
+
+(setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
 
 ; Templates
 (setq org-capture-templates
