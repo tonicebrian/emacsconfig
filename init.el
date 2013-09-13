@@ -178,7 +178,7 @@ same directory as the org-buffer and insert a link to this file."
                     (org-agenda-overriding-header "NEXT actions in the DOING projects:"))
                  )
 
-      (todo "NEXT"  (;(org-tags-match-list-sublevels t)
+      (tags-todo "-DOING/!NEXT"  (;(org-tags-match-list-sublevels t)
                     (org-agenda-overriding-header "NEXT actions of all the active projects") )
 )
       ))
