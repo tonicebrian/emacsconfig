@@ -166,6 +166,11 @@ same directory as the org-buffer and insert a link to this file."
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-start-on-weekday nil)
 (setq org-deadline-warning-days 2)
+(setq org-agenda-todo-ignore-with-date t)
+(setq org-todo-keywords
+      '((sequence "TODO" "NEXT" "|" "CANCELLED" "DONE")))
+(setq org-tag-alist
+      '(("OFFICE" . ?o) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e)))
 
 (setq org-agenda-custom-commands
   `(("D" "Daily Action List"
@@ -175,14 +180,17 @@ same directory as the org-buffer and insert a link to this file."
                   (org-deadline-warning-days 0)
                   ))
       (tags-todo "+DOING/!NEXT" ((org-tags-match-list-sublevels t)
-                    (org-agenda-overriding-header "NEXT actions in the DOING projects:"))
+                    (org-agenda-overriding-header "NEXT actions in the DOING projects:")
+                    (org-agenda-todo-ignore-scheduled t))
                  )
       (tags-todo "+DOING/!TODO" ((org-tags-match-list-sublevels t)
-                    (org-agenda-overriding-header "TODO actions in the DOING projects:"))
+                    (org-agenda-overriding-header "TODO actions in the DOING projects:")
+                    (org-agenda-todo-ignore-scheduled t))
                  )
 
       (tags-todo "-DOING/!NEXT"  (;(org-tags-match-list-sublevels t)
-                    (org-agenda-overriding-header "NEXT actions of all the active projects") )
+                    (org-agenda-overriding-header "NEXT actions of all the active projects")
+                    (org-agenda-todo-ignore-scheduled t))
 )
       ))
     ("W" "Weekly view" (
