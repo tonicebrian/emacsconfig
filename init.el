@@ -168,7 +168,7 @@ same directory as the org-buffer and insert a link to this file."
 (setq org-deadline-warning-days 2)
 (setq org-agenda-todo-ignore-with-date t)
 (setq org-todo-keywords
-      '((sequence "TODO" "NEXT" "|" "DONE" "CANCELLED")))
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
 (setq org-tag-alist
       '(("OFFICE" . ?o) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e)))
 
