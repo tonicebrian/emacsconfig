@@ -36,6 +36,8 @@
 
 (add-hook 'rst-mode (lambda () (flyspell-mode 1)))
 
+(add-hook 'text-mode-hook '(lambda () (set-fill-column 80)))
+
 ; Ensime
 ;; Load the ensime lisp code...
 ; (add-to-list 'load-path "~/.emacs.d/ensime/elisp/")
