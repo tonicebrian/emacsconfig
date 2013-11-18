@@ -183,7 +183,7 @@ same directory as the org-buffer and insert a link to this file."
                   ))
       (tags-todo "+DOING/!NEXT" ((org-tags-match-list-sublevels t)
                     (org-agenda-overriding-header "NEXT actions in the DOING projects:")
-                    (org-agenda-todo-ignore-with-date t))
+                    (org-agenda-tags-todo-honor-ignore-options t))
                  )
       (tags-todo "+DOING/!TODO" ((org-tags-match-list-sublevels t)
                     (org-agenda-overriding-header "TODO actions in the DOING projects:")
