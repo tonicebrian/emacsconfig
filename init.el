@@ -166,7 +166,6 @@ same directory as the org-buffer and insert a link to this file."
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-start-on-weekday nil)
 (setq org-deadline-warning-days 2)
-(setq org-agenda-todo-ignore-scheduled t)
 (setq org-agenda-todo-ignore-with-date t)
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
