@@ -115,6 +115,8 @@ inhibit-startup-echo-area-message t)
 (require 'org)
 (load-library "~/.emacs.d/org-depend.el")
 (require 'org-depend)
+(setq org-journal-dir "~/Dropbox/journal/")
+(require 'org-journal)
 
 (setq org-enforce-todo-dependencies t)
 
@@ -166,6 +168,7 @@ same directory as the org-buffer and insert a link to this file."
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-start-on-weekday nil)
 (setq org-deadline-warning-days 2)
+(setq org-agenda-todo-ignore-scheduled t)
 (setq org-agenda-todo-ignore-with-date t)
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
@@ -199,23 +202,16 @@ same directory as the org-buffer and insert a link to this file."
     )
 )
 
-; Here it comes the platform dependent configuration
-;; This file contains local customizations
-(load "~/.emacs.d/local.el")
-
-;; If we haven't changed that above, provide default values
-(unless (boundp 'org-directory) (setq org-directory "~/Dropbox/GTD"))
-
+(setq org-directory "~/Dropbox/GTD")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/GTD/gtd.org" "~/Dropbox/journal")))
  '(org-agenda-skip-deadline-if-done t)
  '(org-clock-idle-time 10)
  )
-
-(setq org-agenda-files (concat org-directory "/gtd.org"))
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
 
@@ -236,3 +232,5 @@ same directory as the org-buffer and insert a link to this file."
  )
 
 
+;; This file contains local customizations
+(load "~/.emacs.d/local.el")
