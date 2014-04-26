@@ -233,4 +233,4 @@ same directory as the org-buffer and insert a link to this file."
 
 
 ;; This file contains local customizations
-(load "~/.emacs.d/local.el")
+(if (file-exists-p "~/.emacs.d/local.el") (load "~/.emacs.d/local.el"))
