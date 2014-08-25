@@ -15,6 +15,7 @@
                       color-theme-sanityinc-solarized
                       recentf
                       evil
+                      evil-surround
                       org
                       adoc-mode
                       org-jira
@@ -33,6 +34,11 @@
     (package-install p)))
 
 (require 'linum-relative)
+
+;; Allow wrapping of text in characters
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
 
 (add-hook 'rst-mode (lambda () (flyspell-mode 1)))
 
