@@ -124,6 +124,11 @@ inhibit-startup-echo-area-message t)
 (setq org-journal-dir "~/Dropbox/journal/")
 (require 'org-journal)
 
+;; MobileOrg configuration
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+(setq org-mobile-inbox-for-pull "~/Dropbox/MobileOrg/inbox-mobile.org")
+
+
 (setq org-enforce-todo-dependencies t)
 
 ;; Capture images and put them in an org-file
@@ -223,7 +228,10 @@ same directory as the org-buffer and insert a link to this file."
 
 ; Templates
 (setq org-capture-templates
-  '(("t" "Todo" entry (file+headline (concat org-directory "/gtd.org") "Tasks")
+  '(
+   ("i" "Idea" entry (file+headline (concat org-directory "/gtd.org") "Capture")
+             "* %?\n %i\n %a")
+   ("t" "Todo" entry (file+headline (concat org-directory "/gtd.org") "Tasks")
              "* TODO %?\n %i\n %a")
    ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
         "* %?\nEntered on %U\n %i\n %a")))
