@@ -17,15 +17,15 @@
                       evil
                       evil-surround
                       org
-                      adoc-mode
                       org-jira
+                      org-trello
+                      org-journal
+                      adoc-mode
                       scala-mode2
                       linum-relative
                       ein
                       w3m
                       markdown-mode
-                      org-trello
-                      org-journal
                       fuzzy)
   "A list of packages to ensure are installed at launch.")
 
@@ -122,7 +122,13 @@ inhibit-startup-echo-area-message t)
 (load-library "~/.emacs.d/org-depend.el")
 (require 'org-depend)
 (setq org-journal-dir "~/Dropbox/journal/")
-(require 'org-journal)
+;;(require 'org-journal)
+
+;; For Google Calendar syncrhonization
+(setq org-caldav-url "https://www.google.com/calendar/dav")
+(setq org-caldav-calendar-id "toni.cebrian@gmail.com")
+(setq org-caldav-inbox "~/Dropbox/GTD/google-calendar-inbox.org")
+(setq org-caldav-files '("~/Dropbox/GTD/inbox.org"))
 
 ;; MobileOrg configuration
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
@@ -184,7 +190,7 @@ same directory as the org-buffer and insert a link to this file."
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
 (setq org-tag-alist
-      '(("OFFICE" . ?o) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e)))
+      '(("OFFICE" . ?o) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e) ("HOY" . ?t)))
 
 (setq org-agenda-custom-commands
   `(("D" "Daily Action List"
