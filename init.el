@@ -20,7 +20,6 @@
                       org-jira
                       org-trello
                       org-journal
-                      org-wunderlist
                       adoc-mode
                       scala-mode2
                       linum-relative
