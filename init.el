@@ -21,7 +21,6 @@
                       org-trello
                       org-journal
                       adoc-mode
-                      scala-mode2
                       linum-relative
                       ein
                       w3m
@@ -173,7 +172,7 @@ same directory as the org-buffer and insert a link to this file."
 (require 'ob-haskell)
 (require 'ob-dot)
 (require 'ob-python)
-(require 'ob-sh)
+(require 'ob-shell)
 (require 'ob-sql)
 (require 'ob-gnuplot)
 (setq org-src-fontify-natively t)
