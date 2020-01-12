@@ -6,26 +6,32 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(starter-kit
-                      starter-kit-bindings
-                      starter-kit-js
-                      autopair
-                      yasnippet
+(defvar my-packages '(
+                      adoc-mode
                       auto-complete
+                      autopair
                       color-theme-sanityinc-solarized
-                      recentf
+                      ein
                       evil
                       evil-surround
+                      fuzzy
+                      haskell-mode
+                      linum-relative
+                      lsp-mode
+                      lsp-ui
+                      lsp-haskell
+                      markdown-mode
                       org
                       org-jira
-                      org-trello
                       org-journal
-                      adoc-mode
-                      linum-relative
-                      ein
+                      org-trello
+                      recentf
+                      starter-kit
+                      starter-kit-bindings
+                      starter-kit-js
                       w3m
-                      markdown-mode
-                      fuzzy)
+                      yasnippet
+                      )
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -37,6 +43,12 @@
 ;; Allow wrapping of text in characters
 (require 'evil-surround)
 (global-evil-surround-mode 1)
+
+;; LSP Configuration
+(require 'lsp-mode)
+(require 'lsp)
+(require 'lsp-haskell)
+(add-hook 'haskell-mode-hook #'lsp)
 
 
 (add-hook 'rst-mode (lambda () (flyspell-mode 1)))
@@ -172,7 +184,6 @@ same directory as the org-buffer and insert a link to this file."
 (require 'ob-haskell)
 (require 'ob-dot)
 (require 'ob-python)
-(require 'ob-shell)
 (require 'ob-sql)
 (require 'ob-gnuplot)
 (setq org-src-fontify-natively t)
@@ -248,6 +259,7 @@ same directory as the org-buffer and insert a link to this file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(markdown-code-face ((t (:inherit consolas))))
  )
 
 
