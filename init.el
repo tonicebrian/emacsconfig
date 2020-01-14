@@ -1,7 +1,4 @@
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
@@ -16,6 +13,7 @@
                       ein
                       evil
                       evil-surround
+                      flycheck
                       fuzzy
                       haskell-mode
                       linum-relative
@@ -24,13 +22,6 @@
                       lsp-haskell
                       markdown-mode
                       org
-                      org-jira
-                      org-journal
-                      org-trello
-                      recentf
-                      starter-kit
-                      starter-kit-bindings
-                      starter-kit-js
                       w3m
                       yasnippet
                       )
@@ -40,6 +31,8 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+(global-flycheck-mode)
+
 (require 'linum-relative)
 
 ;; Allow wrapping of text in characters
@@ -47,13 +40,14 @@
 (global-evil-surround-mode 1)
 
 ;; LSP Configuration
-(require 'lsp-mode)
 (require 'lsp)
 (require 'lsp-haskell)
+(require 'lsp-ui)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'haskell-mode-hook 'flycheck-mode)
 (add-hook 'haskell-mode-hook #'lsp)
-
-
-(add-hook 'rst-mode (lambda () (flyspell-mode 1)))
+(setq lsp-prefer-flymake nil)
+(setq lsp-haskell-process-path-hie "hie-wrapper")
 
 (add-hook 'text-mode-hook '(lambda () (set-fill-column 80)))
 
@@ -61,11 +55,6 @@
 ;; Load the ensime lisp code...
 ; (add-to-list 'load-path "~/.emacs.d/ensime/elisp/")
 ; (require 'ensime)
-
-;; This step causes the ensime-mode to be started whenever
-;; scala-mode is started for a buffer. You may have to customize this step
-;; if you're not using the standard scala mode.
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;; autopair and yas in all modes
 (autopair-global-mode)
@@ -77,12 +66,6 @@
 (require 'auto-complete-config)
 (setq ac-dictionary-files (list (concat user-emacs-directory ".dict")))
 (ac-config-default)
-
-;; Python
-(require 'python)
-(setq ein:console-args '("--profile" "default"))
-(setq ein:console-executable "/usr/bin/ipython")
-(setq ein:use-auto-complete t)
 
 ;; menu bar is useful when getting started
 (menu-bar-mode)
@@ -132,10 +115,7 @@ inhibit-startup-echo-area-message t)
 ; Org mode configuration
 ;;; Org mode
 (require 'org)
-(load-library "~/.emacs.d/org-depend.el")
-(require 'org-depend)
 (setq org-journal-dir "~/Dropbox/journal/")
-;;(require 'org-journal)
 
 ;; For Google Calendar syncrhonization
 (setq org-caldav-url "https://www.google.com/calendar/dav")
@@ -149,21 +129,6 @@ inhibit-startup-echo-area-message t)
 
 
 (setq org-enforce-todo-dependencies t)
-
-;; Capture images and put them in an org-file
-(defun my-org-screenshot ()
-  "Take a screenshot into a time stamped unique-named file in the
-same directory as the org-buffer and insert a link to this file."
-  (interactive)
-  (setq filename
-        (concat
-         (make-temp-name
-          (concat (buffer-file-name)
-                  "_"
-                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
-  (call-process "import" nil nil nil filename)
-  (insert (concat "[[" filename "]]"))
-  (org-display-inline-images))
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -180,18 +145,6 @@ same directory as the org-buffer and insert a link to this file."
   (org-map-entries 'org-archive-subtree "/CANCELLED" 'file)
   (org-map-entries 'org-archive-subtree "/DONE" 'file)
   )
-
-; Define clock behaviour
-; Org-babel configuration
-(require 'ob-haskell)
-(require 'ob-dot)
-(require 'ob-python)
-(require 'ob-sql)
-(require 'ob-gnuplot)
-(setq org-src-fontify-natively t)
-(setq org-confirm-babel-evaluate nil)
-(setq org-agenda-dim-blocked-tasks t)
-(setq org-enforce-todo-checkbox-dependencies t)
 
 ; Agenda commands
 (setq org-agenda-skip-scheduled-if-done t)
@@ -237,10 +190,14 @@ same directory as the org-buffer and insert a link to this file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-sideline-enable t)
  '(org-agenda-files (quote ("~/Dropbox/GTD/gtd.org")))
  '(org-agenda-skip-deadline-if-done t)
  '(org-clock-idle-time 10)
- )
+ '(package-selected-packages
+   (quote
+    (yasnippet w3m lsp-haskell lsp-ui lsp-mode linum-relative fuzzy evil-surround evil ein color-theme-sanityinc-solarized autopair auto-complete adoc-mode))))
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
 
@@ -261,8 +218,7 @@ same directory as the org-buffer and insert a link to this file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(markdown-code-face ((t (:inherit consolas))))
- )
+ '(markdown-code-face ((t (:inherit consolas)))))
 
 
 ;; This file contains local customizations
