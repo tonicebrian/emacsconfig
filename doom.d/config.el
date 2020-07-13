@@ -91,7 +91,7 @@
   :after (org-roam)
   :hook (org-roam-mode . org-roam-bibtex-mode)
   :config
-  (setq org-roam-bibtex-preformat-keywords
+  (setq orb-preformat-keywords
    '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
   (setq orb-templates
         '(("r" "ref" plain (function org-roam-capture--get-point)
@@ -144,6 +144,9 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+
+;; Hide markup characters in Org mode for a more pleasant experience
+(setq org-hide-emphasis-markers t)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
