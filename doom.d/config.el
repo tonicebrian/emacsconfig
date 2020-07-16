@@ -9,6 +9,9 @@
 (setq user-full-name "Toni Cebrián"
       user-mail-address "toni.cebrian@gmail.com")
 
+(setq ispell-program-name "/usr/local/bin/aspell")
+
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -47,7 +50,16 @@
             :desc "org-roam-find-file" "f" #'org-roam-find-file
             :desc "org-roam-show-graph" "g" #'org-roam-show-graph
             :desc "org-roam-insert" "i" #'org-roam-insert
-            :desc "org-roam-capture" "c" #'org-roam-capture))
+            :desc "org-roam-capture" "c" #'org-roam-capture)
+
+        (setq org-roam-ref-capture-templates
+            '(("r" "ref" plain (function org-roam-capture--get-point)
+               "%?"
+               :file-name "websites/${slug}"
+               :head "#+TITLE: ${title}
+    #+ROAM_KEY: ${ref}
+    - source :: ${ref}"
+               :unnarrowed t))) )
 
 (use-package! org-ref
     ;; :init
