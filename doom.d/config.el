@@ -9,7 +9,7 @@
 (setq user-full-name "Toni Cebrián"
       user-mail-address "toni.cebrian@gmail.com")
 
-(setq ispell-program-name "/usr/local/bin/aspell")
+(setq ispell-program-name "aspell")
 
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -29,17 +29,24 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
+(setq confirm-kill-emacs nil)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq
    org_notes "~/google-drive/OrgRoam/"
    mendeley_bib "~/Documents/Mendeley Desktop/library.bib"
+   org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
    org-directory org_notes
    def-directory org_notes
    org-roam-directory org_notes
    org-roam-index-file "index.org"
    )
+
+(setq org-refile-targets (quote (("tickler.org" :maxlevel . 1)
+                                 ("gtd.org" :level . 1)
+                                 ("someday.org" :level . 2))))
+
 
 (after! org-roam
         (map! :leader
