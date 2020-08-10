@@ -36,7 +36,7 @@
 (setq
    org_notes "~/google-drive/OrgRoam/"
    mendeley_bib "~/Documents/Mendeley Desktop/library.bib"
-   org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+
    org-directory org_notes
    def-directory org_notes
    org-roam-directory org_notes
@@ -47,6 +47,11 @@
                                  ("gtd.org" :level . 1)
                                  ("someday.org" :level . 2))))
 
+
+(after! org
+  (setq
+   org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+   ))
 
 (after! org-roam
         (map! :leader
