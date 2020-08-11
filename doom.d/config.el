@@ -64,6 +64,7 @@
             :desc "org-roam-insert" "i" #'org-roam-insert
             :desc "org-roam-capture" "c" #'org-roam-capture)
 
+        (setq ivy-use-selectable-prompt t)
         (setq org-roam-ref-capture-templates
             '(("r" "ref" plain (function org-roam-capture--get-point)
                "%?"
@@ -72,6 +73,7 @@
     #+ROAM_KEY: ${ref}
     - source :: ${ref}"
                :unnarrowed t))) )
+
 
 (use-package! org-ref
     ;; :init
@@ -111,8 +113,10 @@
     )
 )
 
- (use-package org-roam-bibtex
+(use-package org-roam-bibtex
   :after (org-roam)
+  :bind (:map org-mode-map
+         (("C-c n a" . orb-note-actions)))
   :hook (org-roam-mode . org-roam-bibtex-mode)
   :config
   (setq orb-preformat-keywords
