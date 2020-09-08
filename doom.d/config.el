@@ -37,6 +37,7 @@
    org_notes "~/google-drive/OrgRoam/"
    mendeley_bib "~/Documents/Mendeley Desktop/library.bib"
 
+   default-input-method "spanish-prefix"
    org-directory org_notes
    def-directory org_notes
    org-roam-directory org_notes
@@ -51,6 +52,7 @@
 (after! org
   (setq
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+   org-tag-alist '(("OFFICE" . ?o) ("READ" . ?r) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e) ("HOY" . ?t))
    ))
 
 (after! org-roam
