@@ -53,6 +53,7 @@
   (setq
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
    org-tag-alist '(("OFFICE" . ?o) ("READ" . ?r) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e) ("HOY" . ?t))
+   org-agenda-files (list "tickler.org" "gtd.org" "someday.org")
    ))
 
 (after! org-roam
