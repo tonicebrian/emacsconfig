@@ -44,6 +44,11 @@
    org-roam-index-file "index.org"
    )
 
+
+(add-hook 'text-mode-hook
+   (lambda () (set-input-method "spanish-prefix")))
+
+
 (setq org-refile-targets (quote (("tickler.org" :maxlevel . 1)
                                  ("gtd.org" :level . 1)
                                  ("someday.org" :level . 2))))
@@ -51,6 +56,8 @@
 
 (after! org
   (setq
+   org-startup-with-inline-images t
+   org-image-actual-width nil
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
    org-tag-alist '(("OFFICE" . ?o) ("READ" . ?r) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e) ("HOY" . ?t))
    org-agenda-files (list "tickler.org" "gtd.org" "someday.org")
