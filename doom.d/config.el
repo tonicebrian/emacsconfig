@@ -30,6 +30,7 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 (setq confirm-kill-emacs nil)
+(setq calendar-week-start-day 1)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -61,7 +62,21 @@
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
    org-tag-alist '(("OFFICE" . ?o) ("READ" . ?r) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e) ("HOY" . ?t))
    org-agenda-files (list "tickler.org" "gtd.org" "someday.org")
-   ))
+   org-capture-templates
+   '(("t" "Task" entry (file+headline "gtd.org" "Inbox")
+      "** TODO %?\n")
+     ("p" "Project" entry (file+headline "gtd.org" "Projects")
+      (file "templates/project.org"))
+     ("d" "Daily Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
+      (file "templates/dailyreview.org"))
+     ("w" "Weekly Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
+      (file "templates/weeklyreview.org"))
+     ("m" "Monthly Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
+      (file "templates/monthlyreview.org"))
+     ("a" "Annual Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
+      (file "templates/annualreview.org"))
+   )))
+
 
 (after! org-roam
         (map! :leader
