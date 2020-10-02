@@ -36,6 +36,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq
    org_notes "~/google-drive/OrgRoam/"
+   gtd_folder "~/google-drive/GTD/"
    mendeley_bib "~/Documents/Mendeley Desktop/library.bib"
 
    default-input-method "spanish-prefix"
@@ -63,9 +64,9 @@
    org-tag-alist '(("OFFICE" . ?o) ("READ" . ?r) ("HOME" . ?h) ("DOING" . ?d) ("ERRANDS" . ?e) ("HOY" . ?t))
    org-agenda-files (list "tickler.org" "gtd.org" "someday.org")
    org-capture-templates
-   '(("t" "Task" entry (file+headline "gtd.org" "Inbox")
+   '(("t" "Task" entry (file+headline (lambda ()(expand-file-name (concat gtd_folder "gtd.org"))) "Inbox")
       "** TODO %?\n")
-     ("p" "Project" entry (file+headline "gtd.org" "Projects")
+     ("p" "Project" entry (file+headline (lambda () (expand-file-name (concat gtd_folder "gtd.org"))) "Projects")
       (file "templates/project.org"))
      ("d" "Daily Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
       (file "templates/dailyreview.org"))
@@ -77,11 +78,6 @@
       (file "templates/annualreview.org"))
    )
   )
-  (add-to-list 'org-agenda-custom-commands
-             '("o" "Open loops" agenda ""
-               ((org-agenda-start-day "-2d")
-                (org-agenda-span 4)
-                (org-agenda-start-with-log-mode t))))
   (defun org-archive-done-tasks ()
   (interactive)
   (org-map-entries
