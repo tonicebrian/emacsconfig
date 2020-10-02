@@ -75,8 +75,21 @@
       (file "templates/monthlyreview.org"))
      ("a" "Annual Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
       (file "templates/annualreview.org"))
-   )))
-
+   )
+  )
+  (add-to-list 'org-agenda-custom-commands
+             '("o" "Open loops" agenda ""
+               ((org-agenda-start-day "-2d")
+                (org-agenda-span 4)
+                (org-agenda-start-with-log-mode t))))
+  (defun org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+   "/DONE" 'file))
+  )
 
 (after! org-roam
         (map! :leader
