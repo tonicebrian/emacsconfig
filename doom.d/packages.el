@@ -12,6 +12,8 @@
 (package! org-ref)
 (package! org-roam-bibtex)
 (package! org-noter)
+(package! org-super-agenda)
+(package! org-cliplink)
 
 (package! org-roam-bibtex
   :recipe (:host github :repo "org-roam/org-roam-bibtex"))
@@ -22,7 +24,6 @@
 ;; When using bibtex-completion via the `biblio` module
 (unpin! bibtex-completion helm-bibtex ivy-bibtex)
 
-(package! org-super-agenda)
 
 
 ;; To install a package directly from a remote git repo, you must specify a
