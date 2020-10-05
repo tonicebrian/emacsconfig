@@ -52,8 +52,8 @@
 
 
 (setq org-refile-targets (quote (("tickler.org" :maxlevel . 1)
-                                 ("gtd.org" :level . 2)
-                                 ("someday.org" :level . 2))))
+                                 ("gtd.org" :maxlevel . 2)
+                                 ("someday.org" :maxlevel . 2))))
 
 
 (after! org
@@ -62,7 +62,7 @@
    org-image-actual-width nil
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
    org-tag-alist '(("office" . ?o) ("read" . ?r) ("home" . ?h) ("computer" . ?c) ("doing" . ?d) ("errandS" . ?e) ("HOY" . ?t))
-   org-agenda-files (list "tickler.org" "gtd.org" "someday.org")
+   org-agenda-files (mapcar (lambda (file)(concat gtd_folder file))(list "tickler.org" "gtd.org" "someday.org"))
    org-capture-templates
    '(("t" "Task" entry (file+headline (lambda ()(expand-file-name (concat gtd_folder "gtd.org"))) "Inbox")
       "** TODO %?\n")
