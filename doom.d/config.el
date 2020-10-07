@@ -55,13 +55,17 @@
                                  ("gtd.org" :maxlevel . 2)
                                  ("someday.org" :maxlevel . 2))))
 
+(defvar markdown-link-to-org-regexp "s/\[\(.+\)\](\(.+\))/[[\2][\1]]")
 
+;; Show scheduled things in the near term
 (after! org
   (setq
    org-startup-with-inline-images t
+   org-global-properties
+      '(("Effort" . "0 0:10 0:20 0:30 0:45 1:00 1:30 2:00 3:00 4:00 5:00 6:00 8:00"))
    org-image-actual-width nil
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
-   org-tag-alist '(("office" . ?o) ("read" . ?r) ("home" . ?h) ("computer" . ?c) ("doing" . ?d) ("errandS" . ?e) ("HOY" . ?t))
+   org-tag-alist '(("freelancer" . ?f) ("office" . ?o) ("read" . ?r) ("home" . ?h) ("computer" . ?c) ("doing" . ?d) ("errandS" . ?e) ("HOY" . ?t))
    org-agenda-files (mapcar (lambda (file)(concat gtd_folder file))(list "tickler.org" "gtd.org" "someday.org"))
    org-capture-templates
    '(("t" "Task" entry (file+headline (lambda ()(expand-file-name (concat gtd_folder "gtd.org"))) "Inbox")
@@ -85,6 +89,13 @@
      (org-archive-subtree)
      (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
    "/DONE" 'file))
+  ;;
+  ;; Show scheduled things in the near term
+  (defun my-org-agenda-open-loops ()
+  (interactive)
+  (let ((org-agenda-start-with-log-mode t))
+    (org-agenda-list nil (org-read-date nil nil "-2d") 4)))
+
   )
 
 (after! org-roam
