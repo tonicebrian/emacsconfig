@@ -109,15 +109,18 @@
             :desc "org-roam-insert" "i" #'org-roam-insert
             :desc "org-roam-capture" "c" #'org-roam-capture)
 
-        (setq ivy-use-selectable-prompt t)
-        (setq org-roam-ref-capture-templates
+        (setq
+         ivy-use-selectable-prompt t
+         org-roam-db-location (expand-file-name "org-roam.db" user-emacs-directory)
+         org-roam-ref-capture-templates
             '(("r" "ref" plain (function org-roam-capture--get-point)
                "%?"
                :file-name "websites/${slug}"
                :head "#+TITLE: ${title}
     #+ROAM_KEY: ${ref}
     - source :: ${ref}"
-               :unnarrowed t))) )
+               :unnarrowed t)))
+        )
 
 
 (use-package! org-ref
