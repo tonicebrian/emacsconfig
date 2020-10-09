@@ -57,6 +57,39 @@
 
 (defvar markdown-link-to-org-regexp "s/\[\(.+\)\](\(.+\))/[[\2][\1]]")
 
+
+;; Scripts that aren't in MELPA
+(add-to-list 'load-path "~/.doom.d/vendor/")
+
+;; RDF
+(autoload 'n3-mode "n3-mode" "Major mode for OWL or N3 files" t)
+
+;; Turn on font lock when in n3 mode
+(add-hook 'n3-mode-hook
+          'turn-on-font-lock)
+
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.n3" . n3-mode)
+        '("\\.ttl" . n3-mode)
+        '("\\.trig" . n3-mode)
+        '("\\.owl" . n3-mode))
+       auto-mode-alist))
+(autoload 'shexc-mode "shexc-mode" "Major mode for ShExC (ShEx Compact Syntax) files" t)
+
+;; Turn on font lock when in shexc mode
+;; ShexC
+(add-hook 'shexc-mode-hook
+          'turn-on-font-lock)
+
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.shexc" . shexc-mode)
+        '("\\.shex" . shexc-mode))
+       auto-mode-alist))
+
 ;; Show scheduled things in the near term
 (after! org
   (setq
