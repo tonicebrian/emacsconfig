@@ -14,6 +14,7 @@
 (package! org-noter)
 (package! org-super-agenda)
 (package! org-cliplink)
+(package! simplenote2)
 
 (package! org-roam-bibtex
   :recipe (:host github :repo "org-roam/org-roam-bibtex"))

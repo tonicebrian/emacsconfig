@@ -10,6 +10,7 @@
       user-mail-address "toni.cebrian@gmail.com")
 
 (setq ispell-program-name "aspell")
+(simplenote2-setup)
 
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -256,6 +257,9 @@
 
 ;; Hide markup characters in Org mode for a more pleasant experience
 (setq org-hide-emphasis-markers t)
+
+
+(if (file-exists-p "~/.emacs.d/local.el") (load! "secrets.el"))
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
