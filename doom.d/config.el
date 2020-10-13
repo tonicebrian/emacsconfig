@@ -100,7 +100,7 @@
    org-image-actual-width nil
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
    org-tag-alist '(("freelancer" . ?f) ("office" . ?o) ("read" . ?r) ("home" . ?h) ("computer" . ?c) ("doing" . ?d) ("errandS" . ?e) ("HOY" . ?t))
-   org-agenda-files (mapcar (lambda (file)(concat gtd_folder file))(list "tickler.org" "gtd.org" "someday.org"))
+   org-agenda-files (mapcar (lambda (file)(concat gtd_folder file))(list "gcal.org" "tickler.org" "gtd.org" "someday.org"))
    org-capture-templates
    '(("t" "Task" entry (file+headline (lambda ()(expand-file-name (concat gtd_folder "gtd.org"))) "Inbox")
       "** TODO %?\n")
@@ -116,20 +116,25 @@
       (file "templates/annualreview.org"))
    )
   )
-  (defun org-archive-done-tasks ()
-  (interactive)
-  (org-map-entries
-   (lambda ()
-     (org-archive-subtree)
-     (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
-   "/DONE" 'file))
-  ;;
+  (defun my-org-archive-done-tasks ()
+      (interactive)
+      (org-map-entries
+       (lambda ()
+         (org-archive-subtree)
+         (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+       "/DONE" 'file))
+
   ;; Show scheduled things in the near term
   (defun my-org-agenda-open-loops ()
-  (interactive)
-  (let ((org-agenda-start-with-log-mode t))
-    (org-agenda-list nil (org-read-date nil nil "-2d") 4)))
+     (interactive)
+     (let ((org-agenda-start-with-log-mode t))
+       (org-agenda-list nil (org-read-date nil nil "-2d") 4)))
 
+  ;; My planned TODOs
+  (defun my-org-agenda-planned-todos ()
+     (interactive)
+     (let ((org-agenda-start-with-log-mode t))
+       (org-agenda-list "gtd.org" (org-read-date nil nil "-2d") 4)))
   )
 
 (after! org-roam
@@ -216,6 +221,12 @@
 
            :unnarrowed t))))
 
+(use-package org-gcal
+             :after org
+             :custom
+             (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+             (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) )))
+
 (use-package org-noter
   :after (:any org pdf-view)
   :config
@@ -259,7 +270,7 @@
 (setq org-hide-emphasis-markers t)
 
 
-(if (file-exists-p "~/.emacs.d/local.el") (load! "secrets.el"))
+(if (file-exists-p "~/.doom.d/secrets.el") (load! "secrets.el"))
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
