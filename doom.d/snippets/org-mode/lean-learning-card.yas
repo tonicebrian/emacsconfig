@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: lean-learning-card
+# key: leanlearning
+# --
+
+* Learning Card
+  - Insight Name: ${1:insight name}
+** We believed that
+  ${2: hypothesis}
+** We observed
+  ${3: observation}
+** From that we learned that
+  ${4: learnings and insights}
+** Therefore we will
+  ${5: decisions and actions}

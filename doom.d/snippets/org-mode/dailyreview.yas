@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: daily-review
+# key: dailyreview
+# --
+
+* Daily Review
+- [ ] Clear Physical Desktop
+- [ ] Empty SimpleNote
+- [ ] Clear Email Inboxes
+  #+BEGIN_SRC emacs-lisp
+  (progn
+      (browse-url "https://mail.google.com/mail/u/0/#inbox"))
+  #+END_SRC
+
+- [ ] Collect Calendar Open Loops (+/- 2  days)
+#+BEGIN_SRC emacs-lisp
+  (my-org-agenda-open-loops)
+#+END_SRC
+- [ ] Process streams (Slack, [[https://twitter.com/][Twitter]]) as inboxes - record tasks, read it later, file notes
+- [ ] Check Pull Requests assigned to me
+  #+BEGIN_SRC emacs-lisp
+  (progn (browse-url "https://github.com/pulls/review-requested"))
+  #+END_SRC
+- [ ] Schedule + refile tasks in [[file:~/google-drive/GTD/gtd.org::*Inbox][Org Mode Inbox]]
+- [ ] Schedule today's tasks (immersive -> process, deep -> shallow):
+  #+BEGIN_SRC emacs-lisp
+    (progn
+      (org-agenda nil "a")
+      (org-agenda-day-view))
+  #+END_SRC

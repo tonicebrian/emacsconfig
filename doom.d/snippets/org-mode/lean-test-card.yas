@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name:lean-test-card
+# key: leantest
+# --
+* Test Card
+  - Test Name: ${1:test-name}
+** We believe that
+  ${2}
+** To verify that, we will
+  ${3}
+** And measure
+  ${4}
+** We are right if
+  ${5}
