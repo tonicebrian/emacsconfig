@@ -9,8 +9,10 @@
 (setq user-full-name "Toni Cebrián"
       user-mail-address "toni.cebrian@gmail.com")
 
-(setq ispell-program-name "aspell")
 (simplenote2-setup)
+
+;; Spell check disabled by default
+(setq ispell-program-name "aspell")
 
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -93,6 +95,7 @@
 
 ;; Show scheduled things in the near term
 (after! org
+  (flyspell-mode 0)
   (setq
    org-startup-with-inline-images t
    org-global-properties
