@@ -93,10 +93,26 @@
         '("\\.shex" . shexc-mode))
        auto-mode-alist))
 
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.csv" . csv-mode)
+        '("\\.tsv" . csv-mode))
+       auto-mode-alist))
+(autoload 'csv-mode "csv-mode"
+  "Major mode for editing comma-separated value files." t)
+
+(autoload 'sparql-mode "sparql-mode.el"
+    "Major mode for editing SPARQL files" t)
+(add-to-list 'auto-mode-alist '("\\.sparql$" . sparql-mode))
+(add-to-list 'auto-mode-alist '("\\.rq$" . sparql-mode))
+(add-hook 'sparql-mode-hook 'company-mode)
+
+
 ;; Show scheduled things in the near term
 (after! org
-  (flyspell-mode 0)
   (setq
+   org-highlight-latex-and-related '(latex)
    org-startup-with-inline-images t
    org-global-properties
       '(("Effort" . "0 0:10 0:20 0:30 0:45 1:00 1:30 2:00 3:00 4:00 5:00 6:00 8:00"))
@@ -109,8 +125,6 @@
       "** TODO %?\n")
      ("p" "Project" entry (file+headline (lambda () (expand-file-name (concat gtd_folder "gtd.org"))) "Projects")
       (file "templates/project.org"))
-     ("d" "Daily Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
-      (file "templates/dailyreview.org"))
      ("w" "Weekly Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))
       (file "templates/weeklyreview.org"))
      ("m" "Monthly Review" entry (file (lambda () (expand-file-name (concat (format-time-string "%Y-%m-%d") ".org") org-directory)))

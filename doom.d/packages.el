@@ -16,6 +16,8 @@
 (package! org-cliplink)
 (package! org-gcal)
 (package! simplenote2)
+(package! csv-mode)
+(package! sparql-mode)
 
 (package! org-roam-bibtex
   :recipe (:host github :repo "org-roam/org-roam-bibtex"))
