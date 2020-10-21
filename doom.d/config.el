@@ -108,6 +108,12 @@
 (add-to-list 'auto-mode-alist '("\\.rq$" . sparql-mode))
 (add-hook 'sparql-mode-hook 'company-mode)
 
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.journal" . ledger-mode)
+        )
+       auto-mode-alist))
 
 ;; Show scheduled things in the near term
 (after! org
@@ -178,6 +184,30 @@
                :unnarrowed t)))
         )
 
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq org-super-agenda-groups '((:name "Today"
+                                   :time-grid t
+                                   :scheduled today)
+                                  (:name "Inbox"
+                                   :category "inbox")
+                                  (:name "Work"
+                                   :tag "dowjones")
+                                  (:name "School"
+                                   :tag "school")
+                                  (:name "Green Card"
+                                   :tag "gc")
+                                  (:name "Tools"
+                                   :tag "toolz")
+                                  (:name "errands"
+                                   :tag "errand")
+                                  (:name "Friends & Family"
+                                   :tag "ff")))
+
+  :config
+  (org-super-agenda-mode))
 
 (use-package! org-ref
     ;; :init

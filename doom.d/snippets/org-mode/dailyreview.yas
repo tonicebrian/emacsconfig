@@ -21,10 +21,12 @@
   #+BEGIN_SRC emacs-lisp
   (progn (browse-url "https://github.com/pulls/review-requested"))
   #+END_SRC
-- [ ] Schedule + refile tasks in [[file:~/google-drive/GTD/gtd.org::*Inbox][Org Mode Inbox]]
+- [ ] Schedule + refile tasks in gtd.org
 - [ ] Schedule today's tasks (immersive -> process, deep -> shallow):
   #+BEGIN_SRC emacs-lisp
     (progn
       (org-agenda nil "a")
       (org-agenda-day-view))
   #+END_SRC
+
+* Entries
