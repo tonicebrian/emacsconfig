@@ -124,7 +124,14 @@
       '(("Effort" . "0 0:10 0:20 0:30 0:45 1:00 1:30 2:00 3:00 4:00 5:00 6:00 8:00"))
    org-image-actual-width nil
    org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
-   org-tag-alist '(("freelancer" . ?f) ("office" . ?o) ("read" . ?r) ("home" . ?h) ("computer" . ?c) ("doing" . ?d) ("errandS" . ?e) ("HOY" . ?t))
+   org-tag-alist '(("freelancer" . ?f) 
+                   ("office" . ?o) 
+                   ("read" . ?r) 
+                   ("home" . ?h) 
+                   ("computer" . ?c) 
+                   ("doing" . ?d) 
+                   ("errands" . ?e) 
+                   ("dowjones" . ?j))
    org-agenda-files (mapcar (lambda (file)(concat gtd_folder file))(list "gcal.org" "tickler.org" "gtd.org" "someday.org"))
    org-capture-templates
    '(("t" "Task" entry (file+headline (lambda ()(expand-file-name (concat gtd_folder "gtd.org"))) "Inbox")
@@ -202,26 +209,25 @@
 )
 
 
+(use-package! org-bullets
+  :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
 (use-package! org-super-agenda
   :after org-agenda
   :init
   (setq org-super-agenda-groups '((:name "Today"
                                    :time-grid t
                                    :scheduled today)
+                                  (:name "Next actions"
+                                   :todo "NEXT")
                                   (:name "Inbox"
                                    :category "inbox")
                                   (:name "Work"
                                    :tag "dowjones")
-                                  (:name "School"
-                                   :tag "school")
-                                  (:name "Green Card"
-                                   :tag "gc")
-                                  (:name "Tools"
-                                   :tag "toolz")
                                   (:name "errands"
-                                   :tag "errand")
-                                  (:name "Friends & Family"
-                                   :tag "ff")))
+                                   :tag "errands")
+                                  ))
 
   :config
   (org-super-agenda-mode))

@@ -16,6 +16,7 @@
 #+BEGIN_SRC emacs-lisp
   (my-org-agenda-open-loops)
 #+END_SRC
+- [ ] Open Slack
 - [ ] Process streams (Slack, [[https://twitter.com/][Twitter]]) as inboxes - record tasks, read it later, file notes
 - [ ] Check Pull Requests assigned to me
   #+BEGIN_SRC emacs-lisp
