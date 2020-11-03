@@ -150,8 +150,17 @@
   ;; Show scheduled things in the near term
   (defun my-org-agenda-open-loops ()
      (interactive)
-     (let ((org-agenda-start-with-log-mode t))
+     (let ((org-agenda-start-with-log-mode t)
+           (org-agenda-use-time-grid nil))
+       (org-gcal-fetch)
        (org-agenda-list nil (org-read-date nil nil "-2d") 4)))
+
+  (defun my-org-agenda-longer-open-loops ()
+     (interactive)
+     (let ((org-agenda-start-with-log-mode t)
+           (org-agenda-use-time-grid nil))
+       (org-gcal-fetch)
+       (org-agenda-list nil (org-read-date nil nil "-14d") 28)))
 
   ;; My planned TODOs
   (defun my-org-agenda-planned-todos ()
@@ -159,6 +168,9 @@
      (let ((org-agenda-start-with-log-mode t))
        (org-agenda-list "gtd.org" (org-read-date nil nil "-2d") 4)))
   )
+
+(after! projectile-mode
+  (setq projectile-project-search-path '("~/GIT/")))
 
 (after! org-roam
         (map! :leader
@@ -183,6 +195,11 @@
     - source :: ${ref}"
                :unnarrowed t)))
         )
+
+(use-package! org-gcal
+  :init
+  (add-hook 'emacs-startup-hook #'org-gcal-fetch)
+)
 
 
 (use-package! org-super-agenda
@@ -246,6 +263,24 @@
       )
     )
 )
+
+(after! lsp-ui
+  (setq
+   lsp-ui-doc-position 'top
+   lsp-ui-sideline-enable t
+   ))
+
+(add-hook 'purescript-mode-hook
+  (lambda ()
+    (psc-ide-mode)
+    (company-mode)
+    (flycheck-mode)
+    (turn-on-purescript-indentation)))
+
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'purescript-mode-hook #'lsp-go-install-save-hooks)
 
 (use-package org-roam-bibtex
   :after (org-roam)

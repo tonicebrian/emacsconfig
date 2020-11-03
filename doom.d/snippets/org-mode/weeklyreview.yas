@@ -1,0 +1,57 @@
+# -*- mode: snippet -*-
+# name: weekly-review
+# key: wr
+# --
+
+
+* Weekly Review
+** Get Clear [0/5]
+- [ ] Collect Loose Papers and Materials
+- [ ] Get “IN” to Zero
+  - [ ] Papers
+  - [ ] Physical Notebook
+  - [ ] Physical Objects
+  - [ ] Email Inboxes
+#+BEGIN_SRC emacs-lisp
+(progn
+    (browse-url "https://mail.google.com/mail/u/0/#inbox")
+    (browse-url "https://mail.google.com/mail/u/1/#inbox")
+    (browse-url "https://mail.google.com/mail/u/2/#inbox"))
+#+END_SRC
+  - [ ] Collect Ebook highlights into Evernote (Mendeley, Kindle, Safari)
+  - [ ] Evernote Inbox
+  - [ ] Downloads Folder
+#+BEGIN_SRC emacs-lisp
+(dired "~/Downloads/")
+#+END_SRC
+  - [ ] Desktop
+#+BEGIN_SRC emacs-lisp
+(dired "~/Desktop/")
+#+END_SRC
+- [ ] Empty Your Head: New projects, tasks, waiting-fors, someday/maybes?
+** Get Current [0/9]
+- [ ] Review Previous and Upcoming Calendar Data:
+#+BEGIN_SRC emacs-lisp
+(my-org-agenda-longer-open-loops)
+#+END_SRC
+- [ ] Review Action Lists:
+#+BEGIN_SRC emacs-lisp
+  (let ((org-agenda-files '("~/google-drive/GTD/gtd.org")))
+    (org-agenda "TODO" "T")
+    )
+#+END_SRC
+- [ ] Review Waiting For List:
+#+BEGIN_SRC emacs-lisp
+  (org-agenda "WAITING" "T")
+#+END_SRC
+- [ ] Review Stuck Projects:
+#+BEGIN_SRC emacs-lisp
+  (let ((org-agenda-files '("~/google-drive/GTD/gtd.org")))
+    (org-agenda-list-stuck-projects)
+    )
+#+END_SRC
+
+- [ ] Archive completed or inactive projects.
+** Get Creative [0/5]
+- [ ] Review [[file:~/org/somedaymaybe.org][Someday Maybe List]]
+- [ ] Clock out.
