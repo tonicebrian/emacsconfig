@@ -176,8 +176,7 @@
        (org-agenda-list "gtd.org" (org-read-date nil nil "-2d") 4)))
   )
 
-(after! projectile-mode
-  (setq projectile-project-search-path '("~/GIT/")))
+(setq projectile-project-search-path '("~/GIT/"))
 
 (after! org-roam
         (map! :leader
