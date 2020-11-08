@@ -208,9 +208,13 @@
 )
 
 
-(use-package! org-bullets
-  :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; Por alguna razon los bullets numerados que quiero poner no funciona
+;; TODO. Investigar porque
+;;(use-package! org-bullets
+;;  :init
+;;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;;  (setq org-bullets-bullet-list '("⓵", "⓶", "⓷", "⓸", "⓹"))
+;;  )
 
 (use-package! org-super-agenda
   :after org-agenda
@@ -282,10 +286,12 @@
     (flycheck-mode)
     (turn-on-purescript-indentation)))
 
-(defun lsp-go-install-save-hooks ()
+(defun lsp-helper-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'purescript-mode-hook #'lsp-go-install-save-hooks)
+
+(add-hook 'purescript-mode-hook #'lsp-helper-install-save-hooks)
+(add-hook 'haskell-mode-hook #'lsp-helper-install-save-hooks)
 
 (use-package org-roam-bibtex
   :after (org-roam)
